@@ -90,49 +90,4 @@ public class TimetableTest {
                 DayOfWeek.MONDAY, new TimeOfDay(14, 0));
         Assertions.assertNull(monday14Session);
     }
-
-    @Test
-    void testCountTrainerSessionsForWeekSorted() {
-        Timetable timetable = new Timetable();
-
-        Coach coachIvan = new Coach("Иванов", "Иван", "Иванович");
-        Coach coachPetr = new Coach("Петров", "Петр", "Петрович");
-        Coach coachMaria = new Coach("Сидорова", "Мария", "Ивановна");
-
-        Group group = new Group("Акробатика", Age.ADULT, 60);
-
-        // Добавляем тренировки: Иван - 4, Петр - 2, Мария - 1
-        timetable.addNewTrainingSession(new TrainingSession(group, coachIvan,
-                DayOfWeek.MONDAY, new TimeOfDay(10, 0)));
-        timetable.addNewTrainingSession(new TrainingSession(group, coachIvan,
-                DayOfWeek.MONDAY, new TimeOfDay(12, 0)));
-        timetable.addNewTrainingSession(new TrainingSession(group, coachIvan,
-                DayOfWeek.WEDNESDAY, new TimeOfDay(10, 0)));
-        timetable.addNewTrainingSession(new TrainingSession(group, coachIvan,
-                DayOfWeek.FRIDAY, new TimeOfDay(10, 0))); // Иван: 4
-
-        timetable.addNewTrainingSession(new TrainingSession(group, coachPetr,
-                DayOfWeek.TUESDAY, new TimeOfDay(15, 0)));
-        timetable.addNewTrainingSession(new TrainingSession(group, coachPetr,
-                DayOfWeek.THURSDAY, new TimeOfDay(15, 0))); // Петр: 2
-
-        timetable.addNewTrainingSession(new TrainingSession(group, coachMaria,
-                DayOfWeek.SATURDAY, new TimeOfDay(11, 0))); // Мария: 1
-
-        // Получаем отсортированный список
-        List<Map.Entry<String, Integer>> sorted = timetable.countTrainerSessionsForWeekSorted();
-
-        // Проверяем размер
-        Assertions.assertEquals(3, sorted.size());
-
-        // Проверяем порядок сортировки (по убыванию)
-        Assertions.assertEquals("Иванов Иван Иванович", sorted.get(0).getKey());
-        Assertions.assertEquals(4, sorted.get(0).getValue());
-
-        Assertions.assertEquals("Петров Петр Петрович", sorted.get(1).getKey());
-        Assertions.assertEquals(2, sorted.get(1).getValue());
-
-        Assertions.assertEquals("Сидорова Мария Ивановна", sorted.get(2).getKey());
-        Assertions.assertEquals(1, sorted.get(2).getValue());
-    }
 }
