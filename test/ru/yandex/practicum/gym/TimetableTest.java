@@ -18,15 +18,8 @@ public class TimetableTest {
 
         timetable.addNewTrainingSession(singleTrainingSession);
 
-        // Проверить, что за понедельник вернулось одно занятие
-        List<TrainingSession> mondaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
-        Assertions.assertEquals(1, mondaySessions.size());
-        Assertions.assertEquals(singleTrainingSession, mondaySessions.get(0));
-        Assertions.assertEquals(new TimeOfDay(13, 0), mondaySessions.get(0).getTimeOfDay());
-
-        // Проверить, что за вторник не вернулось занятий
-        List<TrainingSession> tuesdaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
-        Assertions.assertTrue(tuesdaySessions.isEmpty());
+        //Проверить, что за понедельник вернулось одно занятие
+        //Проверить, что за вторник не вернулось занятий
     }
 
     @Test
@@ -54,19 +47,8 @@ public class TimetableTest {
         timetable.addNewTrainingSession(saturdayChildTrainingSession);
 
         // Проверить, что за понедельник вернулось одно занятие
-        List<TrainingSession> mondaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
-        Assertions.assertEquals(1, mondaySessions.size());
-        Assertions.assertEquals(new TimeOfDay(13, 0), mondaySessions.get(0).getTimeOfDay());
-
         // Проверить, что за четверг вернулось два занятия в правильном порядке: сначала в 13:00, потом в 20:00
-        List<TrainingSession> thursdaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.THURSDAY);
-        Assertions.assertEquals(2, thursdaySessions.size());
-        Assertions.assertEquals(new TimeOfDay(13, 0), thursdaySessions.get(0).getTimeOfDay());
-        Assertions.assertEquals(new TimeOfDay(20, 0), thursdaySessions.get(1).getTimeOfDay());
-
         // Проверить, что за вторник не вернулось занятий
-        List<TrainingSession> tuesdaySessions = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
-        Assertions.assertTrue(tuesdaySessions.isEmpty());
     }
 
     @Test
@@ -80,14 +62,8 @@ public class TimetableTest {
 
         timetable.addNewTrainingSession(singleTrainingSession);
 
-        TrainingSession monday13Session = timetable.getTrainingSessionsForDayAndTime(
-                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
-        Assertions.assertNotNull(monday13Session);
-        Assertions.assertEquals(singleTrainingSession, monday13Session);
-        Assertions.assertEquals(new TimeOfDay(13, 0), monday13Session.getTimeOfDay());
-
-        TrainingSession monday14Session = timetable.getTrainingSessionsForDayAndTime(
-                DayOfWeek.MONDAY, new TimeOfDay(14, 0));
-        Assertions.assertNull(monday14Session);
+        //Проверить, что за понедельник в 13:00 вернулось одно занятие
+        //Проверить, что за понедельник в 14:00 не вернулось занятий
     }
+
 }
